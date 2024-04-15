@@ -73,20 +73,20 @@ Ejemplo:
 #include <stdio.h>
 #include <conio.h>
 int main(){
-FILE \_archivo;
-char c=0;
-archivo=fopen("c:\\prueba.txt","r+");
-if(archivo!=NULL) { // Apertura correcta
-while(c!=EOF){ // Se lee hasta llegar al final
-c=fgetc(archivo);
-putchar(c);
-}
-fclose(archivo);
-}
-else{
-printf("Error");
-}
-getch();
+    FILE \_archivo;
+    char c=0;
+    archivo=fopen("c:\\prueba.txt","r+");
+    if(archivo!=NULL) {   // Apertura correcta
+        while(c!=EOF){   // Se lee hasta llegar al final
+            c=fgetc(archivo);
+            putchar(c);
+        }
+        fclose(archivo);
+        }
+    else{
+        printf("Error");
+    }
+    getch();
 }
 ```
 
