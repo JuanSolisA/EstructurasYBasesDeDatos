@@ -1,6 +1,7 @@
 # Manejo de Archivos
 
 En este archivo voy a resumir todo lo necesario para poder trabajar con **archivos en C**, ejemplificando el como se abre, como se leen, como se escriben y modifican.
+
 ## Menu
 
 - [Manejo de Archivos](#manejo-de-archivos)
