@@ -2,7 +2,29 @@
 
 En este archivo voy a resumir todo lo necesario para poder trabajar con **archivos en C**, ejemplificando el como se abre, como se leen, como se escriben y modifican.
 
-## Estructura FILE y punteros a archivos
+## Menu
+
+- [Manejo de Archivos](#manejo-de-archivos)
+  - [Menu](#menu)
+  - [Estructura FILE y punteros a archivos](#estructura-file-y-punteros-a-archivos)
+  - [Apertura y cierre de archivos](#apertura-y-cierre-de-archivos)
+    - [Apertura](#apertura)
+    - [Cierre de archivos](#cierre-de-archivos)
+  - [Procesamiento de archivos de texto](#procesamiento-de-archivos-de-texto)
+    - [Leer y escribir caracteres](#leer-y-escribir-caracteres)
+      - [Función _getc_](#función-getc)
+      - [Función _fputc_](#función-fputc)
+      - [Comprobar final de archivo](#comprobar-final-de-archivo)
+    - [Leer y escribir strings](#leer-y-escribir-strings)
+      - [Función fgets](#función-fgets)
+      - [Función fputs](#función-fputs)
+      - [Función fprintf](#función-fprintf)
+      - [Función fscanf](#función-fscanf)
+      - [Función fflush](#función-fflush)
+    - [Volver al principio de un archivo](#volver-al-principio-de-un-archivo)
+  - [Operaciones para uso con archivos binarios ()](#operaciones-para-uso-con-archivos-binarios-)
+
+## Estructura FILE y punteros a archivos 
 
 En el archivo de cabecera stdio.h se define una estructura llamada FILE. Esa estructura
 representa la cabecera de los archivos. La secuencia de acceso a un archivo debe poseer
@@ -73,20 +95,20 @@ Ejemplo:
 #include <stdio.h>
 #include <conio.h>
 int main(){
-FILE \_archivo;
-char c=0;
-archivo=fopen("c:\\prueba.txt","r+");
-if(archivo!=NULL) { // Apertura correcta
-while(c!=EOF){ // Se lee hasta llegar al final
-c=fgetc(archivo);
-putchar(c);
-}
-fclose(archivo);
-}
-else{
-printf("Error");
-}
-getch();
+    FILE *archivo;
+    char c=0;
+    archivo=fopen("c:\\prueba.txt","r+");
+    if(archivo!=NULL) {   // Apertura correcta
+        while(c!=EOF){   // Se lee hasta llegar al final
+            c=fgetc(archivo);
+            putchar(c);
+        }
+        fclose(archivo);
+        }
+    else{
+        printf("Error");
+    }
+    getch();
 }
 ```
 
@@ -130,3 +152,129 @@ int main(){
     getch();
 }
 ```
+
+### Leer y escribir strings
+
+#### Función fgets
+
+Se trata de una función que permite leer textos de un archivo de texto. Su prototipo es:
+
+`char *fgets(char *texto, int longitud, FILE *pArchivo)`
+
+Esta función lee una cadena de caracteres del archivo asociado al puntero de archivos **pArchivo** y la almacena en el puntero **texto**. Lee la cadena hasta que llegue un salto de línea, o hasta que se supere la longitud indicada. La función devuelve un puntero señalando al texto leído o un puntero nulo (NULL) si la operación provoca un error.
+Ejemplo (lectura de un archivo de texto):
+
+```markdown
+#include <stdio.h>
+#include <conio.h>
+int main(){
+    FILE *archivo;
+    char texto[2000];
+    archivo=fopen("c:\\prueba2.txt","r");
+    if(archivo!=NULL) {
+        fgets(texto,2000,archivo);
+        while(!feof(archivo)){
+        puts(texto);
+        fgets(texto,2000,archivo);
+        }
+        fclose(archivo);
+    }
+    else{
+        printf("Error en la apertura");
+    }
+} 
+```
+
+En el listado el valor 2000 dentro de la funcón **fgets** tiene como único sentido, asegurar
+que se llega al final de línea cada vez que lee el texto (ya que ninguna línea del archivo tendrá más de 2000 caracteres).
+
+#### Función fputs
+
+Es equivalente a la anterior, solo que ahora sirve para escribir strings dentro de un archivo de texto. Prototipo:
+
+`int fputs(const char texto, FILE *pArchivo)`
+
+Escribe el texto en el archivo indicado. Además al final del texto colocará el carácter del salto de línea (al igual que hace la función **puts**). En el caso de que ocurra un error, devuelve EOF. Ejemplo (escritura en un archivo del texto introducido por el usuario en pantalla).
+
+#### Función fprintf
+
+Es una función que permite escribir en un archivo de texto, de forma similar a la función **printf**. Prototipo:
+
+`int fprintf(FILE *pArchivo, const char *formato, ...)`
+
+Escribe en el archivo asociado al puntero **pArchivo** el texto que se le pasa como argumento. La función devuelve el número de caracteres escritos o un valor negativo si se produce un error. Ejemplo:
+
+```markdown
+#include <stdio.h>
+int main(){
+    int n=1; /*Número del empleado*/
+    char nombre[80];
+    double salario;
+    FILE *pArchivo;
+    pArchivo=fopen("c:\\prueba3.txt","w");
+    if(pArchivo!=NULL){
+        do{
+            printf("Introduzca el número de empleado: ");
+            scanf("%d",&n);
+            /*Solo seguimos si n es positivo, en otro caso
+            entenderemos que la lista ha terminado */
+            if(n>0){
+                printf("Introduzca el nombre del empleado: ");
+                scanf("%s",nombre);
+                printf("Introduzca el salario del empleado: ");
+                scanf("%lf",&salario);
+                fprintf(pArchivo,"%d\t%s\t%lf\n",
+                n,nombre,salario);
+            }
+        }while(n>0);
+            fclose(pArchivo);
+    }
+} 
+```
+
+#### Función fscanf
+
+Se trata de la equivalente al **scanf** de lectura de datos por teclado. Funciona igual sólo que
+requiere un primer parámetro que sirve para asociar la lectura a un puntero de archivo. El
+resto de parámetros se manejan igual que en el caso de scanf.
+
+`int fscanf(FILE *pArchivo, const char *formato, ...)`
+Ejemplo:
+
+```markdown
+#include <stdio.h>
+#include <conio.h>
+int main(){
+    int n=1;
+    char nombre[80];
+    double salario;
+    FILE *pArchivo;
+    pArchivo=fopen("c:\\prueba3.dat","r");
+    if(pArchivo!=NULL){
+        while(!feof(pArchivo)){
+            fscanf(pArchivo,"%d\t%s\t%lf\n",&n,nombre,&salario);
+            printf("%d\t%s\t%lf\n",n,nombre,salario);
+        }
+        fclose(pArchivo);
+        getch();
+    }
+}
+```
+
+#### Función fflush
+
+Esta función se utiliza para vaciar el buffer de salida de un archivo. Es decir, si se ha escrito en un archivo y no se ha cerrado, se puede utilizar esta función para asegurarse de que los datos se han escrito en el archivo. Prototipo:
+
+`int fflush(FILE *pArchivo)`
+
+Devuelve cero si la operación ha sido correcta, en otro caso devuelve EOF si se produce un error.
+
+### Volver al principio de un archivo
+
+Para volver al principio de un archivo, se utiliza la función **_rewind_**. Prototipo:
+
+`void rewind(FILE *pArchivo)`
+
+Esta función no devuelve ningún valor. Simplemente coloca el puntero de archivo al principio del archivo.
+
+## Operaciones para uso con archivos binarios ()
