@@ -1,11 +1,15 @@
 # Universidad Tecnológica Nacional
+
 ## Instituto Nacional Superior del Profesorado Técnico
+
 ### Estructuras y Base de Datos TM y TT
+
 #### Ejercicios de Repaso
 
 1. **Recorrer un Vector con Puntero**
    - Dado este vector, utilizar un puntero y recorrerlo:
-     ```
+
+    ```markdown
      int lista[] = {24, 30, 15, 45, 34};
      ```
 
@@ -17,8 +21,7 @@
      d) Una función que muestre cuántos alumnos aprobaron, considerando que para aprobar la nota tiene que ser mayor a 6 inclusive en cada una de las dos instancias: 1er Parcial, 2do Parcial y/o Integral.
      e) Una función que muestre los datos de los alumnos cuyo inicial del nombre empiece con una letra ingresada desde teclado.
 
-   
-   ```
+   ```markdown
    typedef char cadena[50];
    typedef struct {
        int legajo;
@@ -27,15 +30,13 @@
        float nota[5];
    } Alumno;
 
-   
 3. **Gestión de Empleados en una Empresa**
    - Realizar un programa que permita realizar lo siguiente:
     a) Una función que permita cargar los empleados de una empresa hasta que se decida terminar el ingreso de datos con DNI igual a -1. Deberá validarse si el empleado ya fue ingresado o no.
     b) Realizar el ordenamiento de los empleados por orden alfabético.
     c) Mostrar los empleados por sector.
 
-
-```
+```markdown
 typedef char cadena[50];
 typedef struct {
     int legajo;
