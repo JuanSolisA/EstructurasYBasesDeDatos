@@ -1,10 +1,29 @@
 # Manejo de Archivos
 
 En este archivo voy a resumir todo lo necesario para poder trabajar con **archivos en C**, ejemplificando el como se abre, como se leen, como se escriben y modifican.
+## Menu
 
+- [Manejo de Archivos](#manejo-de-archivos)
+  - [Menu](#menu)
+  - [Estructura FILE y punteros a archivos](#estructura-file-y-punteros-a-archivos)
+  - [Apertura y cierre de archivos](#apertura-y-cierre-de-archivos)
+    - [Apertura](#apertura)
+    - [Cierre de archivos](#cierre-de-archivos)
+  - [Procesamiento de archivos de texto](#procesamiento-de-archivos-de-texto)
+    - [Leer y escribir caracteres](#leer-y-escribir-caracteres)
+      - [Función _getc_](#función-getc)
+      - [Función _fputc_](#función-fputc)
+      - [Comprobar final de archivo](#comprobar-final-de-archivo)
+    - [Leer y escribir strings](#leer-y-escribir-strings)
+      - [Función fgets](#función-fgets)
+      - [Función fputs](#función-fputs)
+      - [Función fprintf](#función-fprintf)
+      - [Función fscanf](#función-fscanf)
+      - [Función fflush](#función-fflush)
+    - [Volver al principio de un archivo](#volver-al-principio-de-un-archivo)
+  - [Operaciones para uso con archivos binarios ()](#operaciones-para-uso-con-archivos-binarios-)
 
-
-## Estructura FILE y punteros a archivos
+## Estructura FILE y punteros a archivos 
 
 En el archivo de cabecera stdio.h se define una estructura llamada FILE. Esa estructura
 representa la cabecera de los archivos. La secuencia de acceso a un archivo debe poseer
