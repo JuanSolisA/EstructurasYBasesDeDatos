@@ -7,7 +7,7 @@ Este repositorio contiene la ejercitación realizada durante mis prácticas de e
 - **/ManejoDeCadenas:** Contiene los ejercicios relacionados con cadenas, utilizando punteros, repaso del 1er año de programación 1, etc.
 - **/EstructurasDeDatos:** Contiene los ejercicios relacionados con estructuras de datos, como listas enlazadas, pilas, colas, árboles, etc.
 - **/BaseDeDatos:** Incluye ejercicios y ejemplos de código relacionados con bases de datos, como consultas SQL, manipulación de datos, y diseño de esquemas.
-- **/Ejemplos:** Aquí se encuentran ejemplos de código relevante para entender los conceptos y técnicas utilizadas en los ejercicios.
+- [/Ejemplos:](https://github.com/JuanSolisA/EstructurasYBasesDeDatos/tree/main/Ejemplos) Aquí se encuentran ejemplos de código relevante para entender los conceptos y técnicas utilizadas en los ejercicios.
 - **/Recursos:** Contiene recursos adicionales como documentación, tutoriales y enlaces a materiales de estudio útiles.
 
 ## Uso del Repositorio
