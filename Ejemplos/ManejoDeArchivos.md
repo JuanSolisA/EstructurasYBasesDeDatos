@@ -73,7 +73,7 @@ Ejemplo:
 #include <stdio.h>
 #include <conio.h>
 int main(){
-    FILE \_archivo;
+    FILE *archivo;
     char c=0;
     archivo=fopen("c:\\prueba.txt","r+");
     if(archivo!=NULL) {   // Apertura correcta
