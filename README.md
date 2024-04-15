@@ -29,4 +29,4 @@ git clone https://github.com/JuanSolisA/EstructurasYBasesDeDatos
 
 ## Contacto
 
-Si tienes alguna pregunta o sugerencia, puedes contactarme a través de [mi correo electrónico](mailto:juan.solis.trabajo@email.com) o [mi perfil de GitHub](https://github.com/JuanSolisA). ¡Espero que encuentres útiles estos ejercicios y ejemplos!
+Si tienes alguna pregunta o sugerencia, puedes contactarme a través de [mi correo electrónico](mailto:juan.solis.trabajo@email.com) o [mi perfil de GitHub](https://github.com/JuanSolisA). ¡Espero que estos ejercicios y ejemplos te sirvan!
