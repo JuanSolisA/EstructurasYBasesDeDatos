@@ -39,7 +39,6 @@ void mostrarArchivoTexto()
     }
 
     fclose(archivo);
-    system("pause");
 }
 
 void generarArchivoBinarioVentas() {}
