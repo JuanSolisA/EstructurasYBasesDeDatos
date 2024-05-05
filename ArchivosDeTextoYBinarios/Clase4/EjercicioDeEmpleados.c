@@ -12,6 +12,51 @@ Opción 2: Generar un archivo binario que contenga el nombre de los empleados y 
 #include <stdlib.h>
 #include <string.h>
 
+void mostrarArchivoTexto();
+void generarArchivoBinarioVentas();
+void generarInformesSeparados();
+
+int main()
+{
+    int opcion;
+    char continuar;
+
+    do
+    {
+        printf("Ejercicio de procesamiento de archivos Empleado.csv\n");
+        printf("1. Mostrar el archivo de texto\n");
+        printf("2. Generar un archivo binario con empleados del sector de ventas\n");
+        printf("3. Generar informes separados en archivos de texto\n");
+        printf("Ingrese el numero de la opcion que desea ejecutar: ");
+
+        scanf("%d", &opcion);
+
+        switch (opcion)
+        {
+        case 1:
+            mostrarArchivoTexto();
+            break;
+        case 2:
+            generarArchivoBinarioVentas();
+            break;
+        case 3:
+            generarInformesSeparados();
+            break;
+        default:
+            printf("Opcion no valida\n");
+            break;
+        }
+
+        printf("Desea realizar otra operación? (s/n): ");
+        scanf(" %c", &continuar);
+
+    } while (continuar == 's' || continuar == 'S');
+
+    printf("Fin del programa\n");
+
+    return 0;
+}
+
 void mostrarArchivoTexto()
 {
     FILE *archivo;
@@ -44,33 +89,3 @@ void mostrarArchivoTexto()
 void generarArchivoBinarioVentas() {}
 
 void generarInformesSeparados() {}
-
-int main()
-{
-    int opcion;
-
-    printf("Ejercicio de procesamiento de archivos Empleado.csv\n");
-    printf("1. Mostrar el archivo de texto\n");
-    printf("2. Generar un archivo binario con empleados del sector de ventas\n");
-    printf("3. Generar informes separados en archivos de texto\n");
-    printf("Ingrese el numero de la opcion que desea ejecutar: ");
-
-    scanf("%d", &opcion);
-
-    switch (opcion)
-    {
-    case 1:
-        mostrarArchivoTexto();
-        break;
-    case 2:
-        generarArchivoBinarioVentas();
-        break;
-    case 3:
-        generarInformesSeparados();
-        break;
-    default:
-        printf("Opcion no valida\n");
-        break;
-    }
-    return 0;
-}
