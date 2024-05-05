@@ -12,6 +12,15 @@ Opción 2: Generar un archivo binario que contenga el nombre de los empleados y 
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct
+{
+    int id;
+    char nombre[50];
+    char cargo[50];
+    float salario;
+    char sector[50];
+} Empleado;
+
 void mostrarArchivoTexto();
 void generarArchivoBinarioVentas();
 void generarInformesSeparados();
@@ -62,7 +71,7 @@ void mostrarArchivoTexto()
     FILE *archivo;
     char linea[100];
 
-    archivo = fopen("empleados.csv", "r");
+    archivo = fopen("./empleados.csv", "r");
     if (archivo == NULL)
     {
         printf("Error al abrir el archivo.\n");
@@ -86,6 +95,27 @@ void mostrarArchivoTexto()
     fclose(archivo);
 }
 
-void generarArchivoBinarioVentas() {}
+void generarArchivoBinarioVentas()
+{
+    FILE *archivoCSV, *archivoBinario;
+    Empleado empleado;
+
+    // Apertura de archivos
+    archivoCSV = fopen("empleados.csv", "r");
+    archivoBinario = fopen("empleadosVentas.bin", "wb");
+
+    if (archivoCSV == NULL || archivoBinario == NULL)
+    {
+        printf("Error al abrir los archivos. \n");
+        return;
+    }
+    while (fscanf(archivoCSV, "%d;%[^;];%[^;];%f;%[^;\n]", &empleado.id, empleado.nombre, empleado.cargo, &empleado.salario, empleado.sector) != EOF)
+    {
+        if (strcmp(empleado.sector, "VENTAS") == 0)
+        {
+            fwrite(&empleado, sizeof(Empleado), 1, archivoBinario);
+        }
+    }
+}
 
 void generarInformesSeparados() {}
