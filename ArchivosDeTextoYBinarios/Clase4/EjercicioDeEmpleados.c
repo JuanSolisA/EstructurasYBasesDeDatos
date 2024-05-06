@@ -28,14 +28,14 @@ void generarInformesSeparados();
 int main()
 {
     int opcion;
-    char continuar;
 
     do
     {
-        printf("Ejercicio de procesamiento de archivos Empleado.csv\n");
+        printf("Ejercicio de procesamiento de archivos empleados.csv\n");
         printf("1. Mostrar el archivo de texto\n");
         printf("2. Generar un archivo binario con empleados del sector de ventas\n");
         printf("3. Generar informes separados en archivos de texto\n");
+        printf("0. Salir\n");
         printf("Ingrese el numero de la opcion que desea ejecutar: ");
 
         scanf("%d", &opcion);
@@ -51,15 +51,15 @@ int main()
         case 3:
             generarInformesSeparados();
             break;
+        case 0:
+            printf("Saliendo del programa\n");
+            break;
         default:
             printf("Opcion no valida\n");
             break;
         }
 
-        printf("Desea realizar otra operación? (s/n): ");
-        scanf(" %c", &continuar);
-
-    } while (continuar == 's' || continuar == 'S');
+    } while (opcion != 0);
 
     printf("Fin del programa\n");
 
@@ -79,7 +79,7 @@ void mostrarArchivoTexto()
     }
 
     printf("Contenido del archivo Empleado.cvs:\n");
-    printf("Num de Empleado\tEmpleado\tPuesto\tSalario\tHobby\n\n");
+    printf("Num de Empleado\tEmpleado\tPuesto\tSalario\tSector\n\n");
 
     while (fgets(linea, sizeof(linea), archivo) != NULL)
     {
@@ -106,16 +106,58 @@ void generarArchivoBinarioVentas()
 
     if (archivoCSV == NULL || archivoBinario == NULL)
     {
-        printf("Error al abrir los archivos. \n");
+        perror("Error al abrir los archivos. \n");
         return;
     }
-    while (fscanf(archivoCSV, "%d;%[^;];%[^;];%f;%[^;\n]", &empleado.id, empleado.nombre, empleado.cargo, &empleado.salario, empleado.sector) != EOF)
+
+    while (fscanf(archivoCSV, "%d;%[^;];%[^;];%f;%[^\n]\n", &empleado.id, empleado.nombre, empleado.cargo, &empleado.salario, empleado.sector) != EOF)
     {
+        printf("ID: %d, Nombre: %s, Cargo: %s, Salario: %.2f, Sector: %s\n", empleado.id, empleado.nombre, empleado.cargo, empleado.salario, empleado.sector);
         if (strcmp(empleado.sector, "VENTAS") == 0)
         {
             fwrite(&empleado, sizeof(Empleado), 1, archivoBinario);
         }
     }
+    fclose(archivoCSV);
+    fclose(archivoBinario);
+
+    printf("Archivo binario generado correctamente\n");
 }
 
-void generarInformesSeparados() {}
+void generarInformesSeparados()
+{
+    FILE *archivoCSV, *archivoEmpleado, *archivoOtro;
+    Empleado empleado;
+
+    // Apertura de archivos
+    archivoCSV = fopen("empleados.csv", "r");
+    archivoEmpleado = fopen("empleados.txt", "w");
+    archivoOtro = fopen("otro.txt", "w");
+
+    if (archivoCSV == NULL || archivoEmpleado == NULL || archivoOtro == NULL)
+    {
+        perror("Error al abrir los archivos. \n");
+        return;
+    }
+
+    fprintf(archivoEmpleado, "Empleados con oficio 'Empleado':\n");
+    fprintf(archivoOtro, "Otros empleados:\n");
+
+    while (fscanf(archivoCSV, "%d;%[^;];%[^;];%f;%[^\n]\n", &empleado.id, empleado.nombre, empleado.cargo, &empleado.salario, empleado.sector) != EOF)
+    {
+        if (strcmp(empleado.cargo, "EMPLEADO") == 0)
+        {
+            fprintf(archivoEmpleado, "ID: %d, Nombre: %s, Cargo: %s, Salario: %.2f, Sector: %s\n", empleado.id, empleado.nombre, empleado.cargo, empleado.salario, empleado.sector);
+        }
+        else
+        {
+            fprintf(archivoOtro, "ID: %d, Nombre: %s, Cargo: %s, Salario: %.2f, Sector: %s\n", empleado.id, empleado.nombre, empleado.cargo, empleado.salario, empleado.sector);
+        }
+    }
+
+    fclose(archivoCSV);
+    fclose(archivoEmpleado);
+    fclose(archivoOtro);
+
+    printf("Informes generados correctamente\n");
+}
