@@ -42,7 +42,7 @@ int main()
         // printf("4. Si desea ...\n");
         printf("0. Salir\n");
 
-        scanf("%d", &opcion);
+        scanf("%i", &opcion);
 
         switch (opcion)
         {
@@ -56,15 +56,16 @@ int main()
             mostrarTiempos();
             system("pause");
             break;
-        case 3:
+        /* case 3:
             break;
         case 4:
-            break;
+            break; */
         case 0:
             printf("Saliendo del sistema...");
             break;
         default:
-            printf("Ingrese una opcion valida");
+            printf("Ingrese una opcion valida.\n");
+            system("pause");
             break;
         }
     } while (opcion != 0);
