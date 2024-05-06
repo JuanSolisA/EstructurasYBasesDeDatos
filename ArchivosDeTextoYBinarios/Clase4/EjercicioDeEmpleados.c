@@ -7,7 +7,6 @@ Opción 2: Generar un archivo binario que contenga el nombre de los empleados y 
  Opción 3: Generar un informe con los que tienen oficio="Empleado"  (empleados.txt)
  y otro con los demas empleados.    (otro.txt)
  */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -110,7 +109,7 @@ void generarArchivoBinarioVentas()
         return;
     }
 
-    while (fscanf(archivoCSV, "%d;%[^;];%[^;];%f;%[^\n]\n", &empleado.id, empleado.nombre, empleado.cargo, &empleado.salario, empleado.sector) != EOF)
+    while (fscanf(archivoCSV, "%d;%[^;];%[^;];%f;%[^\n]\n", &empleado.id, empleado.nombre, empleado.cargo, &empleado.salario, empleado.sector) == 5)
     {
         printf("ID: %d, Nombre: %s, Cargo: %s, Salario: %.2f, Sector: %s\n", empleado.id, empleado.nombre, empleado.cargo, empleado.salario, empleado.sector);
         if (strcmp(empleado.sector, "VENTAS") == 0)
@@ -140,11 +139,9 @@ void generarInformesSeparados()
         return;
     }
 
-    fprintf(archivoEmpleado, "Empleados con oficio 'Empleado':\n");
-    fprintf(archivoOtro, "Otros empleados:\n");
-
-    while (fscanf(archivoCSV, "%d;%[^;];%[^;];%f;%[^\n]\n", &empleado.id, empleado.nombre, empleado.cargo, &empleado.salario, empleado.sector) != EOF)
+    while (fscanf(archivoCSV, "%d;%[^;];%[^;];%f;%[^\n]\n", &empleado.id, empleado.nombre, empleado.cargo, &empleado.salario, empleado.sector) == 5)
     {
+        printf("ID: %d, Nombre: %s, Cargo: %s, Salario: %.2f, Sector: %s\n", empleado.id, empleado.nombre, empleado.cargo, empleado.salario, empleado.sector);
         if (strcmp(empleado.cargo, "EMPLEADO") == 0)
         {
             fprintf(archivoEmpleado, "ID: %d, Nombre: %s, Cargo: %s, Salario: %.2f, Sector: %s\n", empleado.id, empleado.nombre, empleado.cargo, empleado.salario, empleado.sector);
@@ -154,10 +151,9 @@ void generarInformesSeparados()
             fprintf(archivoOtro, "ID: %d, Nombre: %s, Cargo: %s, Salario: %.2f, Sector: %s\n", empleado.id, empleado.nombre, empleado.cargo, empleado.salario, empleado.sector);
         }
     }
-
     fclose(archivoCSV);
     fclose(archivoEmpleado);
     fclose(archivoOtro);
 
-    printf("Informes generados correctamente\n");
+    printf("Archivos de texto generados correctamente\n");
 }
