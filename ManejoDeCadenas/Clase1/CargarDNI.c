@@ -83,7 +83,7 @@ void cargarEmpleados(Empleado empleados[], int *numEmpleados) {
 
 void ordenarEmpleados(Empleado empleados[], int numEmpleados) {
     Empleado temp;
-
+    //Ordenamiento por burbujeo o Buble Sort
     for (int i = 0; i < numEmpleados - 1; i++) {
         for (int j = 0; j < numEmpleados - i - 1; j++) {
             if (strcmp(empleados[j].apellido, empleados[j + 1].apellido) > 0) {

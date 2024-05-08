@@ -1,0 +1,5 @@
+La realidad física de los datos es que éstos son números binarios. 
+Como es prácticamente imposible trabajar utilizando el código binario, los datos deben de ser reinterpretados como enteros, caracteres, cadenas, estructuras, etc.
+Al leer un archivo los datos de éste pueden ser leídos como si fueran binarios, o utilizando otra estructura más apropiada para su lectura por parte del programador. 
+A esas estructuras se les llama registros y equivalen a las estructuras (structs) del lenguaje C. Un archivo así entendido es una colección de registros que poseen la misma estructura interna.
+Cada registro se compone de una serie de campos que pueden ser de tipos distintos (incluso un campo podría ser una estructura o un array). En cada campo los datos se pueden leer según el tipo de datos que almacenen (enteros, caracteres,...), pero en realidad son unos y ceros.
