@@ -5,7 +5,7 @@ int main()
 {
 	FILE *archivo;
 	char texto[2000];
-	archivo = fopen("./texto2.txt", "r");
+	archivo = fopen("../texto2.txt", "r");
 	if (archivo != NULL)
 	{
 		fgets(texto, 2000, archivo); // carga una l�nea
